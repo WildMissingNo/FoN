@@ -31,6 +31,10 @@ public class PlayerControls : MonoBehaviour
 	private float cLerp;
 	private bool isRotating;
 
+	public GlobalStats gs;
+
+	private GameObject sInstance1;
+
 	private int Index;
 
 
@@ -230,6 +234,17 @@ public class PlayerControls : MonoBehaviour
 				FPSController.enabled = true;
 				oldRot = transform.rotation;
 			}
+
+			if (handR.transform.childCount > 1) 
+			{
+				for (int i = 0; i < handR.transform.childCount; i++) 
+				{
+					if (i > 0) 
+					{
+						Destroy(handR.transform.GetChild (i).gameObject);
+					}
+				}
+			}
 		}
 	}
 
@@ -250,9 +265,12 @@ public class PlayerControls : MonoBehaviour
 		Debug.Log("Spell 1");
 		castTimer1 += Time.deltaTime;
 
+		sInstance1 = Instantiate (gs.spellSet [0], handR.transform.position, gs.spellSet[0].transform.rotation) as GameObject;
+
 		if(Input.GetMouseButtonUp(1))
 		{
 			castTimer1 = 0;
+			Destroy (sInstance1);
 		}
 	}
 
@@ -359,6 +377,11 @@ public class PlayerControls : MonoBehaviour
 			wardCount++;
 			Debug.Log ("ward constructed");
 		}
+	}
+
+	public void CHANGE_SPELL_SET()
+	{
+		
 	}
 
 	public void PAUSE()

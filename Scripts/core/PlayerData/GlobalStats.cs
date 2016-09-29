@@ -15,6 +15,15 @@ public class GlobalStats : MonoBehaviour
 	 * Mana: The energy used for casting spells
 	 */
 
+	public List<SpellObject> spellSet;
+
+	public List<bool> statusEffects;
+	/*
+	 * [0]: Alight
+	 * [1]: Doused
+	 * [2]: Slag Coat
+	 */
+
 	public string flag;
 	//A flag is used to detirmine whether a player/minion is an "Ally" or an "Enemy"
 }
